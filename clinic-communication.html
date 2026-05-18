@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Clinic Communication Tool | Venetia Yong Tim</title>
+  <meta name="description" content="Case study: Clinic communication tool — Twilio messaging infrastructure connecting clinics and pet owners at scale." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+  <style>
+    .ks-wrap {
+      background: var(--cream);
+      padding: 64px 0 96px;
+    }
+
+    /* Label */
+    .ks-label {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin: 0 0 20px;
+    }
+
+    /* Hero headline */
+    .ks-headline {
+      font-family: var(--font-serif);
+      font-weight: 400;
+      font-size: clamp(2.2rem, 5vw, 4rem);
+      line-height: 1.05;
+      letter-spacing: -.03em;
+      color: var(--ink);
+      margin: 0 0 20px;
+    }
+    .ks-headline em { font-style: italic; }
+
+    /* Intro paragraph */
+    .ks-intro {
+      font-size: .9rem;
+      line-height: 1.65;
+      color: var(--ink-soft);
+      max-width: 680px;
+      margin: 0 0 36px;
+    }
+
+    /* Section row: number + heading */
+    .ks-section-row {
+      display: grid;
+      grid-template-columns: 48px 1fr;
+      gap: 16px;
+      align-items: start;
+      margin-bottom: 28px;
+    }
+    .ks-section-num {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      letter-spacing: .08em;
+      color: var(--muted);
+      padding-top: 6px;
+    }
+    .ks-section-heading {
+      font-family: var(--font-serif);
+      font-weight: 400;
+      font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+      line-height: 1.1;
+      letter-spacing: -.02em;
+      color: var(--ink);
+      margin: 0 0 8px;
+    }
+    .ks-section-heading em { font-style: italic; }
+    .ks-section-sub {
+      font-size: .9rem;
+      color: var(--ink-soft);
+      line-height: 1.55;
+    }
+
+    /* Stats */
+    .ks-stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1px;
+      background: var(--border-solid);
+      border: 1px solid var(--border-solid);
+      border-radius: var(--radius);
+      overflow: hidden;
+      margin-bottom: 40px;
+    }
+    .ks-stat {
+      background: var(--surface);
+      padding: 20px 20px 16px;
+    }
+    .ks-stat-value {
+      font-family: var(--font-serif);
+      font-size: 2.2rem;
+      font-weight: 400;
+      color: var(--ink);
+      letter-spacing: -.02em;
+      line-height: 1;
+      margin: 0 0 5px;
+    }
+    .ks-stat-label {
+      font-family: var(--font-mono);
+      font-size: 9px;
+      letter-spacing: .10em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin: 0;
+    }
+
+    /* Divider */
+    .ks-divider {
+      border: none;
+      border-top: 1px solid var(--border-solid);
+      margin: 0 0 32px;
+    }
+
+    /* Steps + Outputs two-column */
+    .ks-two-col {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 40px;
+    }
+    .ks-col-label {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin: 0 0 16px;
+    }
+    .ks-step-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+    .ks-step {
+      display: grid;
+      grid-template-columns: 28px 1fr;
+      gap: 8px;
+      padding: 12px 0;
+      border-top: 1px solid var(--border);
+      font-size: .875rem;
+      line-height: 1.6;
+      color: var(--ink-soft);
+    }
+    .ks-step:last-child { border-bottom: 1px solid var(--border); }
+    .ks-step-num {
+      font-family: var(--font-mono);
+      font-size: 9px;
+      letter-spacing: .08em;
+      color: var(--muted);
+      padding-top: 3px;
+    }
+
+    /* Back link */
+    .ks-back {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-family: var(--font-mono);
+      font-size: 11px;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 40px;
+      transition: color .15s;
+    }
+    .ks-back:hover { color: var(--ink); opacity: 1; }
+
+    /* Section-to-section divider */
+    .ks-section-divider {
+      border-top: 1px solid var(--border-solid);
+      margin: 64px 0;
+    }
+
+    /* Screenshot band */
+    .ks-screens-wrap {
+      margin-top: 48px;
+      margin-bottom: 48px;
+      border: 1px solid var(--border-solid);
+      border-radius: var(--radius);
+      background: var(--surface);
+      padding: 40px clamp(20px, 4vw, 56px) 36px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 20px;
+    }
+    .ks-screens-eyebrow {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      letter-spacing: .16em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+    .ks-screens-full {
+      width: 100%;
+      max-width: 960px;
+      display: block;
+      border-radius: 12px;
+      box-shadow:
+        0 2px 8px rgba(0,0,0,.06),
+        0 8px 24px rgba(0,0,0,.10);
+    }
+
+    @media (max-width: 600px) {
+      .ks-two-col { grid-template-columns: 1fr; }
+      .ks-stats { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body data-page="case-clinic">
+
+  <header class="site-header">
+    <div class="container">
+      <a href="index.html" class="brand"><span class="js-brand">Venetia Yongtim</span></a>
+      <nav class="nav" aria-label="Main">
+        <a href="index.html"     data-nav="about">About</a>
+        <a href="portfolio.html" data-nav="portfolio">Portfolio</a>
+        <a href="experience.html" data-nav="experience">Experience</a>
+        <a href="mailto:yongtimvenetia@gmail.com">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <div class="ks-wrap">
+      <div class="container">
+
+        <h1 class="ks-headline">Clinic<br><em>communication tool.</em></h1>
+        <p class="ks-intro">Twilio messaging infrastructure connecting clinics and pet owners at scale through spanning secure staff login, async messaging, templated outreach, and outbound workflows.</p>
+
+        <!-- ─── Section 01 ─── -->
+        <div class="ks-section-row">
+          <span class="ks-section-num">01</span>
+          <div>
+            <h2 class="ks-section-heading">The <em>clinic experience.</em></h2>
+            <p class="ks-section-sub">Support both U.S. and U.K. pet owners while staying compliant with regional veterinary regulations. Accommodate varying clinic roles; enable flexible, async communication with secure and fast login for staff.</p>
+          </div>
+        </div>
+
+        <!-- Stats -->
+        <div class="ks-stats">
+          <div class="ks-stat">
+            <p class="ks-stat-value">32</p>
+            <p class="ks-stat-label">Clinics</p>
+          </div>
+          <div class="ks-stat">
+            <p class="ks-stat-value">1,500+</p>
+            <p class="ks-stat-label">Staff</p>
+          </div>
+          <div class="ks-stat">
+            <p class="ks-stat-value">0</p>
+            <p class="ks-stat-label">Breach Incidents</p>
+          </div>
+        </div>
+
+        <!-- Screenshot -->
+        <div class="ks-screens-wrap">
+          <p class="ks-screens-eyebrow">Clinic Async Messaging</p>
+          <img
+            src="images/flex.experience.png"
+            alt="Clinic communication tool interface"
+            class="ks-screens-full"
+            style="width: 80%;"
+          />
+        </div>
+
+        <hr class="ks-divider" />
+
+        <!-- Steps taken + Outputs -->
+        <div class="ks-two-col">
+          <div>
+            <p class="ks-col-label">Steps Taken</p>
+            <ul class="ks-step-list">
+              <li class="ks-step">
+                <span class="ks-step-num">01</span>
+                <span>Collaborated with engineering and clinic staff to assess scope and architectural constraints.</span>
+              </li>
+              <li class="ks-step">
+                <span class="ks-step-num">02</span>
+                <span>Mapped user flows to define access levels and permissions per role.</span>
+              </li>
+              <li class="ks-step">
+                <span class="ks-step-num">03</span>
+                <span>Coordinated implementation to ensure secure and efficient login workflows.</span>
+              </li>
+            </ul>
+          </div>
+          <div>
+            <p class="ks-col-label">Outputs</p>
+            <ul class="ks-step-list">
+              <li class="ks-step">
+                <span class="ks-step-num">01</span>
+                <span>Assigned/Completed message queue with filters by topic, assignee, and status.</span>
+              </li>
+              <li class="ks-step">
+                <span class="ks-step-num">02</span>
+                <span>Threaded view linking client, patient, topic, and assignee to a single conversation.</span>
+              </li>
+              <li class="ks-step">
+                <span class="ks-step-num">03</span>
+                <span>Secure, quick login for associates — SSO with role-based scope.</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- ─── Section 02 ─── -->
+        <div class="ks-section-divider"></div>
+
+        <div class="ks-section-row">
+          <span class="ks-section-num">02</span>
+          <div>
+            <h2 class="ks-section-heading">Templates &amp; <em>outbound messaging.</em></h2>
+            <p class="ks-section-sub">Templates and outbound search enabled staff to securely manage high volumes of follow-ups without repetitive manual responses.</p>
+          </div>
+        </div>
+
+        <!-- Two-column screenshots -->
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin: 48px -22.6%; width: calc(100% + 45.2%);">
+          <div class="ks-screens-wrap" style="margin: 0;">
+            <p class="ks-screens-eyebrow">Template Creation &amp; Storage</p>
+            <img
+              src="images/template-creation.png"
+              alt="Templates panel in Twilio Flex showing My Templates and Team Templates with 1-click insert"
+              class="ks-screens-full"
+            />
+          </div>
+          <div class="ks-screens-wrap" style="margin: 0;">
+            <p class="ks-screens-eyebrow">Outbound Messaging</p>
+            <img
+              src="images/outbound-messaging.png"
+              alt="Twilio Flex outbound search interface with client lookup and conversation history"
+              class="ks-screens-full"
+            />
+          </div>
+        </div>
+
+        <hr class="ks-divider" />
+
+        <!-- Steps taken + Outputs -->
+        <div class="ks-two-col">
+          <div>
+            <p class="ks-col-label">Steps Taken</p>
+            <ul class="ks-step-list">
+              <li class="ks-step">
+                <span class="ks-step-num">01</span>
+                <span>Designed a two-tab template library (My Templates / Team Templates) scoped by clinic topic.</span>
+              </li>
+              <li class="ks-step">
+                <span class="ks-step-num">02</span>
+                <span>Built outbound search — patient, client, email, date range — so staff can initiate conversations safely.</span>
+              </li>
+              <li class="ks-step">
+                <span class="ks-step-num">03</span>
+                <span>Wired conversation history into the composer so staff see the last interaction before sending.</span>
+              </li>
+            </ul>
+          </div>
+          <div>
+            <p class="ks-col-label">Outputs</p>
+            <ul class="ks-step-list">
+              <li class="ks-step">
+                <span class="ks-step-num">01</span>
+                <span>Reusable templates with {{Client Name}} / {{Patient Name}} merge variables and one-click insertion.</span>
+              </li>
+              <li class="ks-step">
+                <span class="ks-step-num">02</span>
+                <span>Outbound messaging surface with full client conversation history and 'Message Client' kick-off.</span>
+              </li>
+              <li class="ks-step">
+                <span class="ks-step-num">03</span>
+                <span>Auto-Reply toggle per clinic with audit trail of which template was sent when.</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+      </div><!-- /.container -->
+    </div><!-- /.ks-wrap -->
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="js-footer-copy"></div>
+      <div class="footer-links js-footer-links"></div>
+    </div>
+  </footer>
+
+  <script src="content.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>

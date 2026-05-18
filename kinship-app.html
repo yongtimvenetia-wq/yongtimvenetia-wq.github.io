@@ -1,0 +1,717 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Kinship App | Venetia Yong Tim</title>
+  <meta name="description" content="Case study: Kinship app, a toolkit to help pet parents become pros." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+  <style>
+    .ks-wrap {
+      background: var(--cream);
+      padding: 64px 0 96px;
+    }
+
+    /* Label */
+    .ks-label {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin: 0 0 20px;
+    }
+
+    /* Hero headline */
+    .ks-headline {
+      font-family: var(--font-serif);
+      font-weight: 400;
+      font-size: clamp(2.2rem, 5vw, 4rem);
+      line-height: 1.05;
+      letter-spacing: -.03em;
+      color: var(--ink);
+      margin: 0 0 20px;
+    }
+    .ks-headline em { font-style: italic; }
+    .ks-headline .hl-box {
+      display: inline;
+      background: var(--accent);
+      padding: 0 10px 4px;
+      border-radius: 6px;
+      font-style: italic;
+    }
+
+    /* Intro paragraph */
+    .ks-intro {
+      font-size: .9rem;
+      line-height: 1.65;
+      color: var(--ink-soft);
+      max-width: 680px;
+      margin: 0 0 36px;
+    }
+
+    /* Main grid: content left, phone right */
+    .ks-main {
+      display: grid;
+      grid-template-columns: 1fr 340px;
+      gap: 64px;
+      align-items: start;
+    }
+
+    /* Section row: number + heading */
+    .ks-section-row {
+      display: grid;
+      grid-template-columns: 48px 1fr;
+      gap: 16px;
+      align-items: start;
+      margin-bottom: 28px;
+    }
+    .ks-section-num {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      letter-spacing: .08em;
+      color: var(--muted);
+      padding-top: 6px;
+    }
+    .ks-section-heading {
+      font-family: var(--font-serif);
+      font-weight: 400;
+      font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+      line-height: 1.1;
+      letter-spacing: -.02em;
+      color: var(--ink);
+      margin: 0 0 8px;
+    }
+    .ks-section-heading em { font-style: italic; }
+    .ks-section-sub {
+      font-size: .9rem;
+      color: var(--ink-soft);
+      line-height: 1.55;
+    }
+
+    /* Stats */
+    .ks-stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1px;
+      background: var(--border-solid);
+      border: 1px solid var(--border-solid);
+      border-radius: var(--radius);
+      overflow: hidden;
+      margin-bottom: 40px;
+    }
+    .ks-stat {
+      background: var(--surface);
+      padding: 20px 20px 16px;
+    }
+    .ks-stat-value {
+      font-family: var(--font-serif);
+      font-size: 2.2rem;
+      font-weight: 400;
+      color: var(--ink);
+      letter-spacing: -.02em;
+      line-height: 1;
+      margin: 0 0 5px;
+      display: flex;
+      align-items: center;
+      gap: 3px;
+    }
+    .ks-stat-star { font-size: 1.2rem; }
+    .ks-stat-label {
+      font-family: var(--font-mono);
+      font-size: 9px;
+      letter-spacing: .10em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin: 0;
+    }
+
+    /* Divider */
+    .ks-divider {
+      border: none;
+      border-top: 1px solid var(--border-solid);
+      margin: 0 0 32px;
+    }
+
+    /* Steps + Outputs two-column */
+    .ks-two-col {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 40px;
+    }
+    .ks-col-label {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin: 0 0 16px;
+    }
+    .ks-step-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+    .ks-step {
+      display: grid;
+      grid-template-columns: 28px 1fr;
+      gap: 8px;
+      padding: 12px 0;
+      border-top: 1px solid var(--border);
+      font-size: .875rem;
+      line-height: 1.6;
+      color: var(--ink-soft);
+    }
+    .ks-step:last-child { border-bottom: 1px solid var(--border); }
+    .ks-step-num {
+      font-family: var(--font-mono);
+      font-size: 9px;
+      letter-spacing: .08em;
+      color: var(--muted);
+      padding-top: 3px;
+    }
+
+    /* Phone mockup / screenshot */
+    .ks-phone-wrap {
+      position: sticky;
+      top: 80px;
+      display: flex;
+      justify-content: center;
+    }
+    .ks-phone-img {
+      width: 100%;
+      max-width: 300px;
+      border-radius: 36px;
+      box-shadow: 0 32px 64px rgba(0,0,0,.18), 0 8px 24px rgba(0,0,0,.10);
+      display: block;
+    }
+
+    /* Back link */
+    .ks-back {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-family: var(--font-mono);
+      font-size: 11px;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 40px;
+      transition: color .15s;
+    }
+    .ks-back:hover { color: var(--ink); opacity: 1; }
+
+    /* Section-to-section divider */
+    .ks-section-divider {
+      border-top: 1px solid var(--border-solid);
+      margin: 64px 0;
+    }
+
+    /* Section 02 full-width stacked layout */
+    .ks-section-full {
+      max-width: 100%;
+    }
+
+    /* Screenshot band — seamless with page */
+    .ks-screens-wrap {
+      margin-top: 48px;
+      margin-bottom: 48px;
+      border: 1px solid var(--border-solid);
+      border-radius: var(--radius);
+      background: var(--surface);
+      padding: 40px clamp(20px, 4vw, 56px) 36px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .ks-screens-eyebrow {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      letter-spacing: .16em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    .ks-screens-full {
+      width: 100%;
+      max-width: 960px;
+      display: block;
+      border-radius: 12px;
+      box-shadow:
+        0 2px 8px rgba(0,0,0,.06),
+        0 8px 24px rgba(0,0,0,.10);
+    }
+
+    @media (max-width: 960px) {
+      .ks-main { grid-template-columns: 1fr; }
+      .ks-phone-wrap { position: static; margin-top: 40px; }
+      .ks-stats { grid-template-columns: repeat(3, 1fr); }
+    }
+    @media (max-width: 600px) {
+      .ks-two-col { grid-template-columns: 1fr; }
+      .ks-stats { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body data-page="case-kinship">
+
+  <header class="site-header">
+    <div class="container">
+      <a href="index.html" class="brand"><span class="js-brand">Venetia Yongtim</span></a>
+      <nav class="nav" aria-label="Main">
+        <a href="index.html"     data-nav="about">About</a>
+        <a href="portfolio.html" data-nav="portfolio">Portfolio</a>
+        <a href="experience.html" data-nav="experience">Experience</a>
+        <a href="mailto:yongtimvenetia@gmail.com">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <div class="ks-wrap">
+      <div class="container">
+
+<div class="ks-main">
+
+          <!-- Left: content -->
+          <div>
+
+            <h1 class="ks-headline">
+              Inside <em>Kinship</em>:<br>
+              the platform behind <span class="hl-box">pet care.</span>
+            </h1>
+
+            <p class="ks-intro">A trusted resource for pet owners, combining educational content with on-demand access to veterinary care. Multiple threads of work. Consumer apps in two markets, the staff platform that powers them, and the comms tooling underneath.</p>
+
+            <!-- Section 01 -->
+            <div class="ks-section-row">
+              <span class="ks-section-num">01</span>
+              <div>
+                <h2 class="ks-section-heading">The <em>Kinship</em> app: a vet in your pocket.</h2>
+                <p class="ks-section-sub">Built a trusted resource for pet owners, combining educational content with on-demand access to veterinary care.</p>
+              </div>
+            </div>
+
+            <!-- Stats -->
+            <div class="ks-stats">
+              <div class="ks-stat">
+                <p class="ks-stat-value">67K</p>
+                <p class="ks-stat-label">Users</p>
+              </div>
+              <div class="ks-stat">
+                <p class="ks-stat-value">62</p>
+                <p class="ks-stat-label">NPS</p>
+              </div>
+              <div class="ks-stat">
+                <p class="ks-stat-value">4.4<span class="ks-stat-star">★</span></p>
+                <p class="ks-stat-label">App Store</p>
+              </div>
+            </div>
+
+            <hr class="ks-divider" />
+
+            <!-- Steps taken + Outputs -->
+            <div class="ks-two-col">
+              <div>
+                <p class="ks-col-label">Steps Taken</p>
+                <ul class="ks-step-list">
+                  <li class="ks-step">
+                    <span class="ks-step-num">01</span>
+                    <span>Led end-to-end delivery aligning design, marketing, support, engineering, and QA on scope and release readiness.</span>
+                  </li>
+                  <li class="ks-step">
+                    <span class="ks-step-num">02</span>
+                    <span>Translated user research insights into prioritized features and actionable requirements.</span>
+                  </li>
+                  <li class="ks-step">
+                    <span class="ks-step-num">03</span>
+                    <span>Established release readiness processes, including QA alignment and rollback planning to mitigate downtime risks.</span>
+                  </li>
+                </ul>
+              </div>
+              <div>
+                <p class="ks-col-label">Outputs</p>
+                <ul class="ks-step-list">
+                  <li class="ks-step">
+                    <span class="ks-step-num">01</span>
+                    <span>Multi-channel support: chat, email, phone, and video consults.</span>
+                  </li>
+                  <li class="ks-step">
+                    <span class="ks-step-num">02</span>
+                    <span>Vet visit recaps combining clinician notes with personalized educational content.</span>
+                  </li>
+                  <li class="ks-step">
+                    <span class="ks-step-num">03</span>
+                    <span>Targeted push and email notifications to drive recurring engagement.</span>
+                  </li>
+                </ul>
+              </div>
+            </div>
+
+          </div><!-- /left -->
+
+          <!-- Right: phone screenshot -->
+          <div class="ks-phone-wrap">
+            <img
+              src="images/kinship-app-screenshot.png"
+              alt="Kinship app showing visit summary notification and pet parent Q&A"
+              class="ks-phone-img"
+            />
+          </div>
+
+        </div><!-- /.ks-main -->
+
+        <!-- ─── Section 02 ─── -->
+        <div class="ks-section-divider"></div>
+
+        <div class="ks-section-full">
+
+          <div class="ks-section-row">
+            <span class="ks-section-num">02</span>
+            <div>
+              <h2 class="ks-section-heading">Multi-channel support <em>(US).</em></h2>
+              <p class="ks-section-sub">Four ways for U.S. pet parents to reach a vet (chat, email, scheduled phone, and live video), funneled into one structured intake.</p>
+            </div>
+          </div>
+
+          <!-- Stats -->
+          <div class="ks-stats">
+            <div class="ks-stat">
+              <p class="ks-stat-value">27K</p>
+              <p class="ks-stat-label">US Users</p>
+            </div>
+            <div class="ks-stat">
+              <p class="ks-stat-value">4</p>
+              <p class="ks-stat-label">Communication Channels</p>
+            </div>
+            <div class="ks-stat">
+              <p class="ks-stat-value">30K+</p>
+              <p class="ks-stat-label">Consults</p>
+            </div>
+          </div>
+
+          <hr class="ks-divider" />
+
+          <!-- Full-bleed composite screenshot -->
+          <div class="ks-screens-wrap">
+            <p class="ks-screens-eyebrow">Ask a Vet: User Flow</p>
+            <img
+              src="images/ask-a-vet-screens.png"
+              alt="Ask a Vet flow: channel selector, topic intake, live chat, and vet recap screens"
+              class="ks-screens-full"
+            />
+          </div>
+
+          <!-- Steps taken + Outputs -->
+          <div class="ks-two-col">
+            <div>
+              <p class="ks-col-label">Steps Taken</p>
+              <ul class="ks-step-list">
+                <li class="ks-step">
+                  <span class="ks-step-num">01</span>
+                  <span>Mapped the 'How do you want to get in touch?' decision tree across health, behaviour, nutrition, vaccinations, and emergency.</span>
+                </li>
+                <li class="ks-step">
+                  <span class="ks-step-num">02</span>
+                  <span>Coordinated the live-chat handoff into Twilio Flex so a licensed veterinary surgeon picks up in real time.</span>
+                </li>
+                <li class="ks-step">
+                  <span class="ks-step-num">03</span>
+                  <span>Designed the post-consult Ask-a-Vet recap: vet name, topic, summary, plus 'Based on Your Conversation' content cards.</span>
+                </li>
+              </ul>
+            </div>
+            <div>
+              <p class="ks-col-label">Outputs</p>
+              <ul class="ks-step-list">
+                <li class="ks-step">
+                  <span class="ks-step-num">01</span>
+                  <span>Channel selector with availability windows (e.g. Video 10AM–6PM EST, every day).</span>
+                </li>
+                <li class="ks-step">
+                  <span class="ks-step-num">02</span>
+                  <span>Topic intake (General, Practice, Prescription, Emergency) so the right vet gets the right context.</span>
+                </li>
+                <li class="ks-step">
+                  <span class="ks-step-num">03</span>
+                  <span>PDF transcript export of the full conversation, delivered back to the pet parent.</span>
+                </li>
+              </ul>
+            </div>
+          </div>
+
+        </div><!-- /.ks-section-full (section 02) -->
+
+        <!-- ─── Section 03 ─── -->
+        <div class="ks-section-divider"></div>
+
+        <div class="ks-section-full">
+
+          <div class="ks-section-row">
+            <span class="ks-section-num">03</span>
+            <div>
+              <h2 class="ks-section-heading">Communication with your <em>vet team (UK).</em></h2>
+              <p class="ks-section-sub">Ability for pet owners to directly contact their clinic staff</p>
+            </div>
+          </div>
+
+          <!-- Stats -->
+          <div class="ks-stats">
+            <div class="ks-stat">
+              <p class="ks-stat-value">32</p>
+              <p class="ks-stat-label">Clinics Live</p>
+            </div>
+            <div class="ks-stat">
+              <p class="ks-stat-value">1,500+</p>
+              <p class="ks-stat-label">Clinic Staff</p>
+            </div>
+            <div class="ks-stat">
+              <p class="ks-stat-value">1,300+</p>
+              <p class="ks-stat-label">Messages Monthly</p>
+            </div>
+          </div>
+
+          <!-- Full-bleed composite screenshot -->
+          <div class="ks-screens-wrap">
+            <p class="ks-screens-eyebrow">Message Practice: User Flow</p>
+            <img
+              src="images/message-practice-screens.png"
+              alt="Message Practice flow: home screen, topic picker, message composer, and visit follow-up thread"
+              class="ks-screens-full"
+            />
+          </div>
+
+          <hr class="ks-divider" />
+
+          <!-- Steps taken + Outputs -->
+          <div class="ks-two-col">
+            <div>
+              <p class="ks-col-label">Steps Taken</p>
+              <ul class="ks-step-list">
+                <li class="ks-step">
+                  <span class="ks-step-num">01</span>
+                  <span>Re-shaped the home screen around the three primary actions: Message Practice, Book a Visit, Prescriptions.</span>
+                </li>
+                <li class="ks-step">
+                  <span class="ks-step-num">02</span>
+                  <span>Negotiated regional compliance with clinical leads; built guardrails into the topic picker (Pet health / Prescriptions / Account / Emergency).</span>
+                </li>
+                <li class="ks-step">
+                  <span class="ks-step-num">03</span>
+                  <span>Supported rich attachments — photos, video up to 100MB — for owners describing symptoms before a visit.</span>
+                </li>
+              </ul>
+            </div>
+            <div>
+              <p class="ks-col-label">Outputs</p>
+              <ul class="ks-step-list">
+                <li class="ks-step">
+                  <span class="ks-step-num">01</span>
+                  <span>Practice messaging with topic chips: Injured or unwell pet · General health · Nutrition · Vaccinations · Visit follow-up.</span>
+                </li>
+                <li class="ks-step">
+                  <span class="ks-step-num">02</span>
+                  <span>Visit-follow-up threads with 'Book a Visit' CTAs and follow-up article cards inline.</span>
+                </li>
+                <li class="ks-step">
+                  <span class="ks-step-num">03</span>
+                  <span>Send-confirmation states with response-time expectation banners ('Message sent').</span>
+                </li>
+              </ul>
+            </div>
+          </div>
+
+        </div><!-- /.ks-section-full (section 03) -->
+
+        <!-- ─── Section 04 ─── -->
+        <div class="ks-section-divider"></div>
+
+        <div class="ks-section-full">
+
+          <div class="ks-section-row">
+            <span class="ks-section-num">04</span>
+            <div>
+              <h2 class="ks-section-heading"><em>Prescription</em> refill requests.</h2>
+              <p class="ks-section-sub">85% of clinic calls were prescription refills, overwhelming staff and leading to missed calls and poor client experience. We moved the workflow from phone support into structured asynchronous flows.</p>
+            </div>
+          </div>
+
+          <!-- Stats -->
+          <div class="ks-stats" style="grid-template-columns: 1fr 1fr;">
+            <div class="ks-stat">
+              <p class="ks-stat-value">58% → 95%</p>
+              <p class="ks-stat-label">Prescription Refill Improvement</p>
+            </div>
+            <div class="ks-stat">
+              <p class="ks-stat-value">7K+</p>
+              <p class="ks-stat-label">Refills Processed</p>
+            </div>
+          </div>
+
+          <!-- Screenshot band -->
+          <div class="ks-screens-wrap">
+            <p class="ks-screens-eyebrow">Prescription Refill: User Flow</p>
+            <img
+              src="images/rx-refill.png"
+              alt="Prescription refill flow: medication intake form and Care Centre hub with Conversations feed"
+              class="ks-screens-full"
+              style="max-width: 470px;"
+            />
+          </div>
+
+          <hr class="ks-divider" />
+
+          <!-- Steps taken + Outputs -->
+          <div class="ks-two-col">
+            <div>
+              <p class="ks-col-label">Steps Taken</p>
+              <ul class="ks-step-list">
+                <li class="ks-step">
+                  <span class="ks-step-num">01</span>
+                  <span>Drove end-to-end execution from discovery through release, ensuring readiness across teams and systems.</span>
+                </li>
+                <li class="ks-step">
+                  <span class="ks-step-num">02</span>
+                  <span>Managed dependencies, mitigated risks, and ensured a smooth rollout across each clinic.</span>
+                </li>
+                <li class="ks-step">
+                  <span class="ks-step-num">03</span>
+                  <span>Designed a structured prescription-refill flow that captures the mandatory data clinics need upfront.</span>
+                </li>
+              </ul>
+            </div>
+            <div>
+              <p class="ks-col-label">Outputs</p>
+              <ul class="ks-step-list">
+                <li class="ks-step">
+                  <span class="ks-step-num">01</span>
+                  <span>Asynchronous messaging channel for clinics to communicate with clients.</span>
+                </li>
+                <li class="ks-step">
+                  <span class="ks-step-num">02</span>
+                  <span>Care Centre hub: Dedicated area where are messages are visible.</span>
+                </li>
+                <li class="ks-step">
+                  <span class="ks-step-num">03</span>
+                  <span>Multi-step refill capture: medication name, strength, days remaining, quantity, photos.</span>
+                </li>
+              </ul>
+            </div>
+          </div>
+
+        </div><!-- /.ks-section-full (section 04) -->
+
+        <!-- ─── Section 05 ─── -->
+        <div class="ks-section-divider"></div>
+
+        <div class="ks-section-full">
+
+          <div class="ks-section-row">
+            <span class="ks-section-num">05</span>
+            <div>
+              <h2 class="ks-section-heading">Templates &amp; <em>outbound messaging.</em></h2>
+              <p class="ks-section-sub">Once async was live, clinic staff needed leverage. Templates and outbound search let one nurse safely handle dozens of follow-ups a day without re-typing the same disclaimers.</p>
+            </div>
+          </div>
+
+          <!-- Stats -->
+          <div class="ks-stats">
+            <div class="ks-stat">
+              <p class="ks-stat-value">3</p>
+              <p class="ks-stat-label">Categories — My / Team / Topic</p>
+            </div>
+            <div class="ks-stat">
+              <p class="ks-stat-value">1-click</p>
+              <p class="ks-stat-label">Insert</p>
+            </div>
+            <div class="ks-stat">
+              <p class="ks-stat-value">100%</p>
+              <p class="ks-stat-label">Audit Trail</p>
+            </div>
+          </div>
+
+          <!-- Two-column screenshots -->
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin: 48px 0;">
+            <div class="ks-screens-wrap" style="margin: 0;">
+              <p class="ks-screens-eyebrow">Template Creation &amp; Storage</p>
+              <img
+                src="images/template-creation.png"
+                alt="Templates panel in Twilio Flex showing My Templates and Team Templates with 1-click insert"
+                class="ks-screens-full"
+              />
+            </div>
+            <div class="ks-screens-wrap" style="margin: 0;">
+              <p class="ks-screens-eyebrow">Outbound Messaging</p>
+              <img
+                src="images/outbound-messaging.png"
+                alt="Twilio Flex outbound search interface with client lookup and conversation history"
+                class="ks-screens-full"
+              />
+            </div>
+          </div>
+
+          <hr class="ks-divider" />
+
+          <!-- Steps taken + Outputs -->
+          <div class="ks-two-col">
+            <div>
+              <p class="ks-col-label">Steps Taken</p>
+              <ul class="ks-step-list">
+                <li class="ks-step">
+                  <span class="ks-step-num">01</span>
+                  <span>Designed a two-tab template library (My Templates / Team Templates) scoped by clinic topic.</span>
+                </li>
+                <li class="ks-step">
+                  <span class="ks-step-num">02</span>
+                  <span>Built outbound search — patient, client, email, date range — so staff can initiate conversations safely.</span>
+                </li>
+                <li class="ks-step">
+                  <span class="ks-step-num">03</span>
+                  <span>Wired conversation history into the composer so staff see the last interaction before sending.</span>
+                </li>
+              </ul>
+            </div>
+            <div>
+              <p class="ks-col-label">Outputs</p>
+              <ul class="ks-step-list">
+                <li class="ks-step">
+                  <span class="ks-step-num">01</span>
+                  <span>Reusable templates with {{Client Name}} / {{Patient Name}} merge variables and one-click insertion.</span>
+                </li>
+                <li class="ks-step">
+                  <span class="ks-step-num">02</span>
+                  <span>Outbound messaging surface with full client conversation history and 'Message Client' kick-off.</span>
+                </li>
+                <li class="ks-step">
+                  <span class="ks-step-num">03</span>
+                  <span>Auto-Reply toggle per clinic with audit trail of which template was sent when.</span>
+                </li>
+              </ul>
+            </div>
+          </div>
+
+        </div><!-- /.ks-section-full (section 05) -->
+
+      </div><!-- /.container -->
+    </div><!-- /.ks-wrap -->
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="js-footer-copy"></div>
+      <div class="footer-links js-footer-links"></div>
+    </div>
+  </footer>
+
+  <script src="content.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Portfolio — Venetia Yong Tim</title>
+  <meta name="description" content="Selected projects by Venetia Yong Tim." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body data-page="portfolio">
+
+  <header class="site-header">
+    <div class="container">
+      <a href="index.html" class="brand"><span class="js-brand">Venetia Yongtim</span></a>
+      <nav class="nav" aria-label="Main">
+        <a href="index.html"                        data-nav="about">About</a>
+        <a href="portfolio.html"                    data-nav="portfolio">Portfolio</a>
+        <a href="experience.html"                   data-nav="experience">Experience</a>
+        <a href="mailto:yongtimvenetia@gmail.com">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="page-intro">
+      <div class="container">
+        <h1>Portfolio</h1>
+        <p class="intro-text js-portfolio-intro"></p>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <div class="carousel-wrap">
+          <button class="carousel-btn carousel-prev" aria-label="Previous project">&#8592;</button>
+          <div class="carousel-viewport">
+            <div class="project-grid js-portfolio-grid"></div>
+          </div>
+          <button class="carousel-btn carousel-next" aria-label="Next project">&#8594;</button>
+        </div>
+        <div class="carousel-dots js-carousel-dots"></div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="js-footer-copy"></div>
+      <div class="footer-links js-footer-links"></div>
+    </div>
+  </footer>
+
+  <script src="content.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>

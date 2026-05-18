@@ -1,0 +1,1266 @@
+/* ============================================================
+   styles.css — Bold direction (Instrument Serif + Inter + JetBrains Mono)
+   Cream background · dark ink · mint accent. Editorial-zine feel.
+   Adapted from PortfolioBold design direction.
+   ============================================================ */
+
+:root {
+  --cream:        #efece4;
+  --ink:          #13211c;
+  --ink-soft:     #3a4a44;
+  --muted:        #6a7873;
+  --accent:       #a4d4c4;
+  --accent-ink:   #0a1714;
+  --surface:      #ffffff;
+  --border:       rgba(19, 33, 28, 0.10);
+  --border-solid: rgba(19, 33, 28, 0.14);
+
+  --font-sans:  'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-serif: 'Instrument Serif', Georgia, 'Times New Roman', serif;
+  --font-mono:  'JetBrains Mono', 'Courier New', monospace;
+
+  --maxw:   1200px;
+  --ease:   cubic-bezier(.22, .61, .36, 1);
+  --radius: 16px;
+
+  --shadow-sm: 0 1px 3px rgba(0,0,0,.06), 0 4px 16px rgba(0,0,0,.04);
+  --shadow-md: 0 2px 0 rgba(19,33,28,.04), 0 18px 40px -24px rgba(19,33,28,.20);
+  --shadow-lg: 0 8px 40px rgba(0,0,0,.14);
+}
+
+/* ---------- Reset / base ---------- */
+*, *::before, *::after { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0;
+  font-family: var(--font-sans);
+  color: var(--ink);
+  background: var(--cream);
+  line-height: 1.6;
+  font-size: 15px;
+  -webkit-font-smoothing: antialiased;
+}
+img { max-width: 100%; display: block; }
+a { color: var(--ink); text-decoration: none; transition: opacity .15s; }
+a:hover { opacity: 0.7; }
+
+h1, h2, h3, h4 {
+  font-family: var(--font-serif);
+  font-weight: 400;
+  color: var(--ink);
+  margin: 0 0 .5em;
+  line-height: 1.05;
+  letter-spacing: -.01em;
+}
+h1 { font-size: 3rem; }
+h2 { font-size: 2.2rem; }
+h3 { font-size: 1.5rem; }
+p  { margin: 0 0 1em; }
+ul { padding-left: 1.2em; margin: 0 0 1em; }
+li { margin-bottom: .4em; }
+
+/* ---------- Layout ---------- */
+.container {
+  max-width: var(--maxw);
+  margin: 0 auto;
+  padding: 0 64px;
+}
+
+/* ============================================================
+   Header / nav — pill buttons with offset box-shadow
+   ============================================================ */
+.site-header {
+  background: rgba(239, 236, 228, 0.96);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 2px solid var(--ink);
+  position: sticky;
+  top: 0;
+  z-index: 50;
+}
+.site-header .container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 16px;
+  padding-bottom: 16px;
+  gap: 24px;
+  flex-wrap: wrap;
+}
+.brand {
+  font-family: var(--font-mono);
+  font-weight: 600;
+  font-size: 12px;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: var(--ink);
+  text-decoration: none;
+}
+.brand:hover { opacity: 1; }
+
+/* Hide brand name on About page — headline already shows the name */
+body[data-page="about"] .brand { visibility: hidden; pointer-events: none; }
+
+.nav {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+.nav a {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  padding: 10px 20px;
+  border: 2px solid var(--accent-ink);
+  border-radius: 999px;
+  color: var(--accent);
+  background: var(--accent-ink);
+  box-shadow: 4px 4px 0 var(--accent), 4px 4px 0 1px var(--accent-ink);
+  transform: translate(-2px, -2px);
+  transition: transform .12s var(--ease), box-shadow .12s var(--ease), opacity .12s;
+  text-decoration: none;
+}
+.nav a:hover {
+  opacity: 1;
+  transform: translate(0, 0);
+  box-shadow: none;
+}
+.nav a:active {
+  transform: translate(1px, 1px) scale(0.98);
+  box-shadow: 2px 2px 0 var(--accent), 2px 2px 0 1px var(--accent-ink);
+  opacity: 0.82;
+  transition-duration: 0.05s;
+}
+.nav a.active {
+  background: var(--accent-ink);
+  color: var(--accent);
+  box-shadow: 4px 4px 0 var(--accent), 4px 4px 0 1px var(--accent-ink);
+  transform: translate(-2px, -2px);
+  opacity: 1;
+}
+
+/* ============================================================
+   Hero — full-bleed accent block (About page only)
+   ============================================================ */
+.hero {
+  padding: 64px 0 48px;
+}
+body[data-page="about"] .hero {
+  background: var(--accent);
+  color: var(--accent-ink);
+  padding: 40px 0 0;
+  border-bottom: 2px solid var(--ink);
+}
+
+.hero-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 40px;
+  align-items: end;
+}
+.hero-grid.has-photo {
+  grid-template-columns: 1fr 360px;
+}
+
+/* Large display headline (About page name) */
+.about-headline {
+  font-family: var(--font-serif);
+  font-weight: 400;
+  line-height: .88;
+  letter-spacing: -.03em;
+  margin: 0 0 32px;
+  color: var(--accent-ink);
+}
+
+/* Higher specificity to beat .hero h1 */
+.hero h1.about-headline {
+  font-size: clamp(5rem, 14vw, 13rem);
+}
+
+.hero h1 {
+  font-size: 2.8rem;
+  margin-bottom: 8px;
+}
+
+.hero .subheadline {
+  font-size: 1.05rem;
+  line-height: 1.55;
+  margin: 0 0 28px;
+  max-width: 38em;
+  color: var(--accent-ink);
+  opacity: .75;
+}
+
+/* About-page circular photo */
+.hero-photo {
+  width: 100%;
+  max-width: 340px;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 4px solid var(--accent-ink);
+  display: block;
+  margin-left: auto;
+}
+
+/* Photo badge overlay (AVID TINKERER) */
+.photo-col-wrap {
+  position: relative;
+}
+.photo-badge-overlay {
+  position: absolute;
+  bottom: 36px;
+  right: -12px;
+  background: var(--accent-ink);
+  color: var(--accent);
+  border-radius: 999px;
+  padding: 7px 18px;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: .10em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  pointer-events: none;
+}
+
+/* Quote block */
+.about-quote {
+  position: relative;
+  margin: 0 0 28px;
+  padding: 14px 0 14px 24px;
+  border-left: 3px solid var(--accent-ink);
+  max-width: 38em;
+}
+.about-quote p {
+  font-family: var(--font-serif);
+  font-size: 1.15rem;
+  color: var(--accent-ink);
+  line-height: 1.5;
+  margin: 0;
+  font-style: italic;
+}
+.about-quote strong {
+  font-style: normal;
+  font-weight: 400;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+/* Hero stat strip (bottom of about hero) */
+.hero-stat-strip {
+  border-top: 2px solid var(--accent-ink);
+  margin-top: 40px;
+}
+.stat-strip-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 0;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: var(--accent-ink);
+}
+.stat-item {
+  opacity: .8;
+}
+.stat-badge {
+  background: var(--accent-ink);
+  color: var(--accent);
+  border-radius: 999px;
+  padding: 5px 14px;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+
+/* ============================================================
+   Operating Principle — dark block (homepage)
+   ============================================================ */
+.operating-principle {
+  background: var(--ink);
+  padding: 56px 0 52px;
+}
+.op-label {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: rgba(239,236,228,.45);
+  margin: 0 0 28px;
+}
+.op-quote p {
+  font-family: var(--font-serif);
+  font-size: clamp(1.7rem, 3.5vw, 2.6rem);
+  color: var(--cream);
+  line-height: 1.25;
+  margin: 0 0 44px;
+  max-width: 20em;
+}
+.op-quote em {
+  font-style: italic;
+}
+.op-quote .op-accent {
+  color: var(--accent);
+  font-style: italic;
+}
+.op-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+.op-footer .pill {
+  border-color: rgba(239,236,228,.25);
+  color: rgba(239,236,228,.75);
+}
+.currently-badge {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: .06em;
+  color: rgba(239,236,228,.55);
+  border: 1px solid rgba(239,236,228,.2);
+  border-radius: 999px;
+  padding: 6px 16px;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+/* ============================================================
+   Page-intro header — dark ink block (Portfolio / Experience / AI pages)
+   ============================================================ */
+.page-intro {
+  background: var(--ink);
+  color: var(--cream);
+  padding: 52px 0;
+  border-bottom: 2px solid var(--ink);
+}
+.page-intro h1 {
+  font-family: var(--font-serif);
+  font-size: clamp(2.8rem, 6vw, 5.5rem);
+  color: var(--cream);
+  line-height: .95;
+  margin: 0 0 12px;
+  letter-spacing: -.02em;
+}
+.page-intro .intro-text {
+  font-size: .95rem;
+  color: rgba(239, 236, 228, .6);
+  max-width: 600px;
+  margin: 0;
+}
+
+/* ============================================================
+   Buttons
+   ============================================================ */
+.btn {
+  display: inline-block;
+  padding: 11px 22px;
+  border-radius: 999px;
+  border: 2px solid var(--accent-ink);
+  background: var(--accent-ink);
+  color: var(--accent) !important;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  text-decoration: none;
+  box-shadow: 4px 4px 0 var(--accent), 4px 4px 0 1px var(--accent-ink);
+  transform: translate(-2px, -2px);
+  transition: transform .12s var(--ease), box-shadow .12s var(--ease);
+  margin-right: 10px;
+  margin-top: 8px;
+  cursor: pointer;
+}
+.btn:hover {
+  opacity: 1;
+  transform: translate(0, 0);
+  box-shadow: none;
+}
+.btn:active {
+  transform: translate(1px, 1px) scale(0.98);
+  box-shadow: 2px 2px 0 var(--accent), 2px 2px 0 1px var(--accent-ink);
+  opacity: 0.82;
+  transition-duration: 0.05s;
+}
+.btn.secondary {
+  background: transparent;
+  color: var(--ink) !important;
+  border-color: var(--ink);
+  box-shadow: 4px 4px 0 var(--ink);
+}
+.btn.secondary:hover {
+  transform: translate(0, 0);
+  box-shadow: none;
+  opacity: 1;
+}
+
+/* About page — buttons inherit the accent-ink context */
+body[data-page="about"] .hero .btn {
+  background: var(--accent-ink);
+  color: var(--accent) !important;
+  border-color: var(--accent-ink);
+  box-shadow: 4px 4px 0 rgba(255,255,255,.4), 4px 4px 0 1px var(--accent-ink);
+}
+body[data-page="about"] .hero .btn.secondary {
+  background: transparent;
+  color: var(--accent-ink) !important;
+  border-color: var(--accent-ink);
+  box-shadow: 4px 4px 0 var(--accent-ink);
+}
+
+/* ---------- Pills / tags ---------- */
+.pills { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; }
+.pill {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  padding: 6px 14px;
+  border-radius: 999px;
+  border: 1px solid var(--border-solid);
+  color: var(--ink-soft);
+  background: transparent;
+}
+
+/* ============================================================
+   Section
+   ============================================================ */
+.section { padding: 64px 0; }
+.section h2 { margin-bottom: 16px; }
+
+/* ============================================================
+   Carousel wrapper (Portfolio page)
+   ============================================================ */
+.carousel-wrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: 24px;
+}
+
+.carousel-viewport {
+  overflow: hidden;
+  flex: 1;
+  border-radius: var(--radius);
+}
+
+.carousel-btn {
+  flex-shrink: 0;
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  border: 1px solid var(--border-solid);
+  background: var(--surface);
+  color: var(--ink);
+  font-size: 1.1rem;
+  line-height: 1;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background .2s, box-shadow .2s, transform .2s;
+  box-shadow: var(--shadow-sm);
+}
+.carousel-btn:hover {
+  background: var(--accent);
+  color: #fff;
+  transform: scale(1.08);
+  box-shadow: var(--shadow-md, var(--shadow-lg));
+}
+
+.carousel-dots {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 20px;
+}
+.carousel-dot {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  border: none;
+  background: var(--border-solid);
+  cursor: pointer;
+  padding: 0;
+  transition: background .3s, transform .3s;
+}
+.carousel-dot.active {
+  background: var(--accent);
+  transform: scale(1.3);
+}
+
+/* ============================================================
+   Project grid / cards (Portfolio page)
+   ============================================================ */
+.project-grid {
+  display: flex;
+  flex-wrap: nowrap;
+  gap: 24px;
+  width: 100%;
+  transition: transform 0.55s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.project-card {
+  /* 3 visible on desktop: (100% − 2 gaps) / 3 */
+  flex: 0 0 calc((100% - 48px) / 3);
+  background: var(--surface);
+  border: 1px solid var(--border-solid);
+  border-radius: var(--radius);
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+  transition: transform .25s var(--ease), box-shadow .25s var(--ease);
+  display: flex;
+  flex-direction: column;
+}
+.project-card:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--shadow-lg);
+}
+.project-card .card-image {
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  object-fit: cover;
+  background: var(--accent);
+}
+.project-card .card-body {
+  padding: 24px 26px;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+.project-card h3 {
+  font-family: var(--font-serif);
+  font-size: 1.7rem;
+  font-weight: 400;
+  margin-bottom: 8px;
+  line-height: 1.05;
+  letter-spacing: -.01em;
+}
+.project-card p {
+  color: var(--ink-soft);
+  font-size: 14px;
+  margin-bottom: 14px;
+  line-height: 1.55;
+}
+.project-card .card-footer { margin-top: auto; padding-top: 4px; }
+
+@media (max-width: 768px) {
+  .project-card {
+    /* 2 visible on tablet */
+    flex: 0 0 calc((100% - 24px) / 2);
+  }
+}
+@media (max-width: 480px) {
+  .project-card {
+    /* 1 visible on mobile */
+    flex: 0 0 100%;
+  }
+}
+
+/* ============================================================
+   Experience page hero
+   ============================================================ */
+.exp-page-hero {
+  padding: 72px 0 0;
+  background: var(--cream);
+}
+.exp-section-label {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin: 0 0 18px;
+}
+.exp-page-title {
+  font-family: var(--font-serif);
+  font-size: clamp(3.5rem, 8vw, 6.5rem);
+  font-weight: 400;
+  line-height: .95;
+  letter-spacing: -.02em;
+  margin: 0;
+  color: var(--ink);
+}
+.exp-page-title em {
+  font-style: italic;
+}
+[data-page="experience"] .section {
+  padding-top: 24px;
+}
+
+/* ============================================================
+   Experience entries
+   ============================================================ */
+.exp-list {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 24px;
+  margin-top: 0;
+}
+
+.exp-card {
+  background: var(--surface);
+  border: 1px solid var(--border-solid);
+  border-radius: var(--radius);
+  padding: 32px 36px 36px;
+  box-shadow: var(--shadow-sm);
+  transition: transform .2s var(--ease), box-shadow .2s var(--ease);
+}
+.exp-card:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-md);
+}
+
+/* Top row: date left, tags right */
+.exp-card-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+.exp-card .role-dates {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: .04em;
+  color: var(--muted);
+}
+.exp-card .role-tags {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: .05em;
+  color: var(--ink-soft);
+  border: 1px solid var(--border-solid);
+  border-radius: 999px;
+  padding: 5px 14px;
+  white-space: nowrap;
+}
+
+/* Company name — large serif */
+.exp-card .role-company {
+  display: block;
+  font-family: var(--font-serif);
+  font-size: clamp(2.4rem, 4vw, 3.4rem);
+  font-weight: 400;
+  color: var(--ink);
+  line-height: 1;
+  letter-spacing: -.01em;
+  margin-bottom: 10px;
+}
+/* Job title — italic below company */
+.exp-card .role-title {
+  font-size: 15px;
+  color: var(--ink-soft);
+  font-style: italic;
+  font-family: var(--font-sans);
+  font-weight: 400;
+  margin: 0 0 24px;
+  line-height: 1.4;
+}
+
+/* Numbered bullet list */
+.exp-card ul {
+  counter-reset: exp-counter;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+.exp-card li {
+  counter-increment: exp-counter;
+  display: flex;
+  gap: 16px;
+  font-size: 14px;
+  color: var(--ink);
+  line-height: 1.6;
+}
+.exp-card li::before {
+  content: counter(exp-counter, decimal-leading-zero);
+  font-family: var(--font-mono);
+  font-size: 10px;
+  color: var(--muted);
+  padding-top: 3px;
+  flex-shrink: 0;
+}
+
+/* Education */
+.education-block { margin-top: 56px; }
+.education-block h2 {
+  font-family: var(--font-serif);
+  font-size: 2.5rem;
+  margin-bottom: 20px;
+  letter-spacing: -.01em;
+}
+.edu-card {
+  background: var(--surface);
+  border: 1px solid var(--border-solid);
+  border-radius: var(--radius);
+  padding: 24px 28px;
+  margin-bottom: 16px;
+  box-shadow: var(--shadow-sm);
+  transition: transform .2s var(--ease);
+}
+.edu-card:hover { transform: translateX(4px); }
+.edu-card .edu-title {
+  font-family: var(--font-serif);
+  font-size: 1.4rem;
+  font-weight: 400;
+  margin: 0 0 6px;
+  letter-spacing: -.01em;
+}
+.edu-card .edu-meta {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin: 0 0 8px;
+}
+.edu-card .edu-details {
+  font-size: 14px;
+  color: var(--ink-soft);
+  margin: 0;
+  line-height: 1.55;
+}
+
+/* ============================================================
+   AI Exploration entries
+   ============================================================ */
+.ai-list { display: flex; flex-direction: column; gap: 20px; margin-top: 24px; }
+.ai-card {
+  background: var(--surface);
+  border: 1px solid var(--border-solid);
+  border-radius: var(--radius);
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+  display: grid;
+  grid-template-columns: 1fr;
+  transition: transform .25s var(--ease), box-shadow .25s var(--ease);
+}
+.ai-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-lg);
+}
+.ai-card.has-image { grid-template-columns: 300px 1fr; }
+.ai-card .ai-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  min-height: 200px;
+  background: var(--accent);
+}
+.ai-card .ai-body { padding: 28px 32px; }
+.ai-card h3 {
+  font-family: var(--font-serif);
+  font-size: 1.8rem;
+  font-weight: 400;
+  margin-bottom: 6px;
+  letter-spacing: -.01em;
+}
+.ai-card .ai-date {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 14px;
+}
+.ai-card p {
+  color: var(--ink-soft);
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+/* ============================================================
+   Empty-state hint
+   ============================================================ */
+.empty-hint {
+  background: var(--surface);
+  border: 1px dashed var(--border-solid);
+  border-radius: var(--radius);
+  padding: 24px;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: .04em;
+  color: var(--muted);
+}
+
+/* ============================================================
+   Credentials section
+   ============================================================ */
+.credentials-block { margin-top: 64px; }
+
+.creds-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-top: 1px dashed var(--border-solid);
+  border-bottom: 1px dashed var(--border-solid);
+  padding: 12px 0;
+  margin-bottom: 20px;
+}
+.creds-label {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.creds-count {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: .08em;
+  color: var(--muted);
+}
+
+.creds-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+}
+
+/* ── The ticket ── */
+.cred-ticket {
+  display: flex;
+  background: var(--ink);
+  border-radius: 12px;
+  overflow: visible;         /* allow notch circles to bleed */
+  min-height: 190px;
+  position: relative;
+  clip-path: none;
+}
+
+/* ── Left stub — dark variant (default / PMP) ── */
+.cred-stub {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 20px 20px 20px 24px;
+  width: 120px;
+  flex-shrink: 0;
+  background: var(--ink);
+  border-radius: 12px 0 0 12px;
+}
+.cred-stub-label {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: rgba(164,212,196,.5);  /* muted mint */
+}
+.cred-abbr {
+  font-family: var(--font-serif);
+  font-size: clamp(1.9rem, 3vw, 2.8rem);
+  font-weight: 400;
+  color: var(--accent);         /* mint on dark */
+  line-height: 1;
+  letter-spacing: -.02em;
+  margin-top: auto;
+}
+
+/* ── Left stub — mint variant (PSPO·I, even tickets) ── */
+.cred-ticket.stub-accent .cred-stub {
+  background: var(--accent);   /* #a4d4c4 mint fill */
+}
+.cred-ticket.stub-accent .cred-stub-label {
+  color: rgba(10,23,20,.45);   /* dark muted */
+}
+.cred-ticket.stub-accent .cred-abbr {
+  color: var(--ink);            /* dark text on mint */
+}
+
+/* ── Perforated divider with notch circles ── */
+.cred-perf {
+  position: relative;
+  width: 20px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: visible;
+}
+/* the dashed line */
+.cred-perf::after {
+  content: '';
+  position: absolute;
+  top: 0; bottom: 0;
+  left: 50%;
+  width: 1px;
+  background-image: repeating-linear-gradient(
+    to bottom,
+    transparent,
+    transparent 5px,
+    rgba(255,255,255,.22) 5px,
+    rgba(255,255,255,.22) 10px
+  );
+}
+/* top notch */
+.cred-perf::before {
+  content: '';
+  position: absolute;
+  top: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 20px; height: 20px;
+  border-radius: 50%;
+  background: var(--cream);
+  z-index: 2;
+  box-shadow: 0 0 0 1px rgba(19,33,28,.06);
+}
+/* bottom notch — via a sibling pseudo on the ticket itself */
+.cred-ticket::after {
+  content: '';
+  position: absolute;
+  bottom: -10px;
+  left: 120px;
+  transform: translateX(-50%);
+  width: 20px; height: 20px;
+  border-radius: 50%;
+  background: var(--cream);
+  z-index: 2;
+  box-shadow: 0 0 0 1px rgba(19,33,28,.06);
+  pointer-events: none;
+}
+
+/* ── Right body ── */
+.cred-body {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  padding: 20px 24px 20px 16px;
+  gap: 2px;
+  background: var(--ink);
+  border-radius: 0 12px 12px 0;
+}
+.cred-issuer {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: rgba(164,212,196,.5);
+  margin: 0 0 4px;
+}
+.cred-name {
+  font-family: var(--font-serif);
+  font-size: 1.3rem;
+  font-weight: 400;
+  color: var(--cream);
+  margin: 0 0 16px;
+  line-height: 1.15;
+  letter-spacing: -.01em;
+}
+
+.cred-meta {
+  display: flex;
+  gap: 32px;
+  margin-bottom: 10px;
+}
+.cred-meta-block {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+.cred-meta-label {
+  font-family: var(--font-mono);
+  font-size: 8px;
+  letter-spacing: .10em;
+  text-transform: uppercase;
+  color: rgba(164,212,196,.45);
+}
+.cred-meta-value {
+  font-family: var(--font-sans);
+  font-size: 16px;
+  font-weight: 500;
+  color: var(--cream);
+  letter-spacing: -.01em;
+}
+
+.cred-note {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  letter-spacing: .04em;
+  color: rgba(239,236,228,.35);
+  margin: 0 0 auto;
+  line-height: 1.6;
+}
+
+.cred-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 16px;
+  padding-top: 10px;
+  border-top: 1px solid rgba(255,255,255,.07);
+}
+.cred-number {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  letter-spacing: .08em;
+  color: rgba(164,212,196,.35);
+}
+.cred-stamp {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--accent);
+  border: 1px solid rgba(164,212,196,.5);
+  border-radius: 4px;
+  padding: 4px 10px;
+  text-decoration: none;
+}
+.cred-stamp--link {
+  cursor: pointer;
+  transition: background .15s, color .15s;
+}
+.cred-stamp--link:hover {
+  background: rgba(164,212,196,.15);
+  border-color: var(--accent);
+}
+
+@media (max-width: 900px) {
+  .creds-grid { grid-template-columns: 1fr; }
+  .cred-abbr  { font-size: 1.6rem; }
+  .cred-stub  { width: 100px; }
+  .cred-ticket::after { left: 100px; }
+}
+
+/* ============================================================
+   Toolbox — "How I operate" three-card section
+   ============================================================ */
+.toolbox-block { margin-top: 80px; }
+
+.toolbox-header {
+  border-top: 1px dashed var(--border-solid);
+  border-bottom: 1px dashed var(--border-solid);
+  padding: 12px 0;
+  margin-bottom: 36px;
+}
+.toolbox-label {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.toolbox-heading {
+  font-family: var(--font-serif);
+  font-size: clamp(2.4rem, 5vw, 3.8rem);
+  font-weight: 400;
+  color: var(--ink);
+  letter-spacing: -.02em;
+  line-height: 1;
+  margin: 0 0 40px;
+}
+.toolbox-heading em { font-style: italic; }
+
+.toolbox-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+}
+
+.toolbox-card {
+  border-radius: var(--radius);
+  padding: 28px 28px 32px;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Mint card */
+.toolbox-card--mint {
+  background: #9fcfbf;
+  color: var(--ink);
+}
+/* Dark card */
+.toolbox-card--dark {
+  background: var(--ink);
+  color: var(--cream);
+}
+/* White card */
+.toolbox-card--white {
+  background: var(--surface);
+  color: var(--ink);
+  border: 1px solid var(--border-solid);
+}
+
+.toolbox-card-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 20px;
+}
+.toolbox-card-title {
+  font-family: var(--font-serif);
+  font-size: 1.9rem;
+  font-weight: 400;
+  letter-spacing: -.02em;
+  line-height: 1;
+  margin: 0;
+}
+.toolbox-card--dark .toolbox-card-title { color: var(--cream); }
+.toolbox-card--mint .toolbox-card-title,
+.toolbox-card--white .toolbox-card-title { color: var(--ink); }
+
+.toolbox-card-num {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: .08em;
+  opacity: .45;
+  padding-top: 4px;
+}
+
+.toolbox-card ul {
+  list-style: disc;
+  padding-left: 1.1em;
+  margin: 0;
+}
+.toolbox-card ul li {
+  font-size: .875rem;
+  line-height: 1.55;
+  margin-bottom: 6px;
+}
+.toolbox-card--dark ul li { color: rgba(239,236,228,.8); }
+
+@media (max-width: 900px) {
+  .toolbox-grid { grid-template-columns: 1fr; }
+}
+
+/* ============================================================
+   About page — Connect / contact strip
+   ============================================================ */
+.about-connect {
+  padding: 52px 0 56px;
+  background: var(--cream);
+  border-top: 1px solid var(--border-solid);
+}
+.about-connect-label {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin: 0 0 20px;
+}
+/* Override default .btn style — clean outlined link-style */
+.about-connect .js-about-socials {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+.about-connect .btn,
+.about-connect .btn.secondary {
+  background: transparent;
+  color: var(--ink) !important;
+  border: 1.5px solid var(--ink);
+  box-shadow: none;
+  transform: none;
+  padding: 11px 24px;
+  font-size: 11px;
+  letter-spacing: .06em;
+  transition: background .18s var(--ease), color .18s var(--ease), border-color .18s var(--ease);
+  margin-top: 0;
+}
+.about-connect .btn:hover,
+.about-connect .btn.secondary:hover {
+  background: var(--ink);
+  color: var(--cream) !important;
+  border-color: var(--ink);
+  box-shadow: none;
+  transform: none;
+  opacity: 1;
+}
+.about-connect .btn:active,
+.about-connect .btn.secondary:active {
+  opacity: 0.75;
+  transform: scale(0.98);
+  box-shadow: none;
+}
+
+/* ============================================================
+   Footer — dark ink background
+   ============================================================ */
+.site-footer {
+  background: var(--ink);
+  color: var(--cream);
+  padding: 40px 0;
+  margin-top: 0;
+  border-top: none;
+}
+.site-footer .container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+.js-footer-copy {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: rgba(239, 236, 228, .45);
+}
+.footer-links {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+.site-footer a {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  color: rgba(239, 236, 228, .55);
+}
+.site-footer a:hover {
+  color: var(--accent);
+  opacity: 1;
+}
+
+/* ============================================================
+   Animations
+   ============================================================ */
+@keyframes pageIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+body { animation: pageIn .35s var(--ease); }
+
+/* ============================================================
+   Responsive
+   ============================================================ */
+@media (max-width: 900px) {
+  .container { padding: 0 32px; }
+  .hero-grid.has-photo { grid-template-columns: 1fr; }
+  .hero-photo { max-width: 260px; margin: 0 auto; }
+  .ai-card.has-image { grid-template-columns: 1fr; }
+  .ai-card .ai-image { min-height: 180px; }
+  .exp-card { padding: 22px 24px; }
+  .exp-list { grid-template-columns: 1fr; }
+}
+@media (max-width: 600px) {
+  .container { padding: 0 20px; }
+  .about-headline { font-size: 2.8rem; }
+  .page-intro h1 { font-size: 2.5rem; }
+  .site-header .container { padding-top: 12px; padding-bottom: 12px; }
+  .nav a { padding: 8px 14px; font-size: 10px; }
+  .section { padding: 48px 0; }
+}
+
+/* Respect reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation: none !important; transition: none !important; }
+}

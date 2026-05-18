@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Client Integrations | Venetia Yong Tim</title>
+  <meta name="description" content="Case study: Customizable tele-vet workflows deployed across 10+ partner platforms." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+  <style>
+    .ks-wrap {
+      background: var(--cream);
+      padding: 64px 0 96px;
+    }
+
+    .ks-label {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin: 0 0 20px;
+    }
+
+    .ks-headline {
+      font-family: var(--font-serif);
+      font-weight: 400;
+      font-size: clamp(2.2rem, 5vw, 4rem);
+      line-height: 1.05;
+      letter-spacing: -.03em;
+      color: var(--ink);
+      margin: 0 0 20px;
+    }
+    .ks-headline em { font-style: italic; }
+
+    .ks-intro {
+      font-size: .9rem;
+      line-height: 1.65;
+      color: var(--ink-soft);
+      max-width: 680px;
+      margin: 0 0 48px;
+    }
+
+    /* Stats row */
+    .ks-stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1px;
+      background: var(--border-solid);
+      border: 1px solid var(--border-solid);
+      border-radius: var(--radius);
+      overflow: hidden;
+      margin-bottom: 40px;
+    }
+    .ks-stat {
+      background: var(--surface);
+      padding: 20px 20px 16px;
+    }
+    .ks-stat-value {
+      font-family: var(--font-serif);
+      font-size: 2.2rem;
+      font-weight: 400;
+      color: var(--ink);
+      letter-spacing: -.02em;
+      line-height: 1;
+      margin: 0 0 5px;
+    }
+    .ks-stat-label {
+      font-family: var(--font-mono);
+      font-size: 9px;
+      letter-spacing: .10em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin: 0;
+    }
+
+    .ks-divider {
+      border: none;
+      border-top: 1px solid var(--border-solid);
+      margin: 0 0 32px;
+    }
+
+    /* Three-column grid: Steps / Outputs / Outcome */
+    .ks-three-col {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 40px;
+      margin-bottom: 0;
+    }
+
+    .ks-col-label {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin: 0 0 16px;
+    }
+
+    .ks-step-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+    }
+    .ks-step {
+      display: grid;
+      grid-template-columns: 28px 1fr;
+      gap: 8px;
+      padding: 12px 0;
+      border-top: 1px solid var(--border);
+      font-size: .875rem;
+      line-height: 1.6;
+      color: var(--ink-soft);
+    }
+    .ks-step:last-child { border-bottom: 1px solid var(--border); }
+    .ks-step-num {
+      font-family: var(--font-mono);
+      font-size: 9px;
+      letter-spacing: .08em;
+      color: var(--muted);
+      padding-top: 3px;
+    }
+
+    /* Section heading row */
+    .ks-section-row {
+      display: grid;
+      grid-template-columns: 48px 1fr;
+      gap: 16px;
+      align-items: start;
+      margin-bottom: 28px;
+    }
+    .ks-section-num {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      letter-spacing: .08em;
+      color: var(--muted);
+      padding-top: 6px;
+    }
+    .ks-section-heading {
+      font-family: var(--font-serif);
+      font-weight: 400;
+      font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+      line-height: 1.1;
+      letter-spacing: -.02em;
+      color: var(--ink);
+      margin: 0 0 8px;
+    }
+    .ks-section-heading em { font-style: italic; }
+    .ks-section-sub {
+      font-size: .9rem;
+      color: var(--ink-soft);
+      line-height: 1.55;
+    }
+
+    .ks-section-divider {
+      border-top: 1px solid var(--border-solid);
+      margin: 64px 0;
+    }
+
+    /* Two-column layout: content + sticky image */
+    .ks-main {
+      display: grid;
+      grid-template-columns: 1fr 360px;
+      gap: 64px;
+      align-items: start;
+    }
+
+    /* Sticky image */
+    .ks-widget-wrap {
+      position: sticky;
+      top: 80px;
+      display: flex;
+      justify-content: center;
+    }
+    .ks-widget-img {
+      width: 100%;
+      max-width: 288px;
+      border-radius: 16px;
+      box-shadow: 0 24px 56px rgba(0,0,0,.14), 0 6px 20px rgba(0,0,0,.08);
+      display: block;
+    }
+
+    @media (max-width: 960px) {
+      .ks-main { grid-template-columns: 1fr; }
+      .ks-widget-wrap { position: static; margin-top: 40px; }
+    }
+    @media (max-width: 900px) {
+      .ks-three-col { grid-template-columns: 1fr; }
+      .ks-stats { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 600px) {
+      .ks-stats { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body data-page="case-integrations">
+
+  <header class="site-header">
+    <div class="container">
+      <a href="index.html" class="brand"><span class="js-brand">Venetia Yongtim</span></a>
+      <nav class="nav" aria-label="Main">
+        <a href="index.html"      data-nav="about">About</a>
+        <a href="portfolio.html"  data-nav="portfolio">Portfolio</a>
+        <a href="experience.html" data-nav="experience">Experience</a>
+        <a href="mailto:yongtimvenetia@gmail.com">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <div class="ks-wrap">
+      <div class="container">
+
+        <div class="ks-main">
+
+          <!-- Left: content -->
+          <div>
+
+            <!-- Hero -->
+            <h1 class="ks-headline">
+              Vet communication<br>
+              <em>tool widget.</em>
+            </h1>
+
+            <p class="ks-intro">Before Kinship was an app, it was a widget. A drop-in veterinary-care surface that businesses embedded into their own websites and mobile apps, helping partner brands attract and engage pet-owning customers.</p>
+
+            <!-- Stats -->
+            <div class="ks-stats" style="grid-template-columns: 1fr 1fr;">
+              <div class="ks-stat">
+                <p class="ks-stat-value">10+</p>
+                <p class="ks-stat-label">Client Integrations</p>
+              </div>
+              <div class="ks-stat">
+                <p class="ks-stat-value">&lt;2 month</p>
+                <p class="ks-stat-label">Go Live Window</p>
+              </div>
+            </div>
+
+            <hr class="ks-divider" />
+
+            <!-- Three-column: Steps / Outputs / Outcome -->
+            <div class="ks-three-col">
+
+              <div>
+                <p class="ks-col-label">Steps Taken</p>
+                <ul class="ks-step-list">
+                  <li class="ks-step">
+                    <span class="ks-step-num">01</span>
+                    <span>Worked closely with each business to understand their specific use cases for the widget.</span>
+                  </li>
+                  <li class="ks-step">
+                    <span class="ks-step-num">02</span>
+                    <span>Worked with Engineering, Design, DevOps, and Legal teams to build the widget.</span>
+                  </li>
+                  <li class="ks-step">
+                    <span class="ks-step-num">03</span>
+                    <span>Managed integration with clients to ensure smooth, successful implementation across platforms.</span>
+                  </li>
+                </ul>
+              </div>
+
+              <div>
+                <p class="ks-col-label">Outputs</p>
+                <ul class="ks-step-list">
+                  <li class="ks-step">
+                    <span class="ks-step-num">01</span>
+                    <span>Modular widget: Ask A Vet, Pet Health Symptom Checker, Food &amp; Nutrition Finder, Pet History &amp; Profile.</span>
+                  </li>
+                  <li class="ks-step">
+                    <span class="ks-step-num">02</span>
+                    <span>Custom-branded experiences tailored to each partner's identity and workflow.</span>
+                  </li>
+                  <li class="ks-step">
+                    <span class="ks-step-num">03</span>
+                    <span>10+ partner businesses successfully injected widget into their platform</span>
+                  </li>
+                </ul>
+              </div>
+
+              <div>
+                <p class="ks-col-label">Outcome</p>
+                <ul class="ks-step-list">
+                  <li class="ks-step">
+                    <span class="ks-step-num">01</span>
+                    <span>Generated foundational data identifying pet owners' primary concerns.</span>
+                  </li>
+                  <li class="ks-step">
+                    <span class="ks-step-num">02</span>
+                    <span>Created the stepping stone that became the Kinship app.</span>
+                  </li>
+                </ul>
+              </div>
+
+            </div><!-- /.ks-three-col -->
+
+          </div><!-- /left -->
+
+          <!-- Right: sticky widget image -->
+          <div class="ks-widget-wrap">
+            <img
+              src="images/widget.png"
+              alt="Vet communication widget embedded in a partner platform"
+              class="ks-widget-img"
+            />
+          </div>
+
+        </div><!-- /.ks-main -->
+
+      </div><!-- /.container -->
+    </div><!-- /.ks-wrap -->
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="js-footer-copy"></div>
+      <div class="footer-links js-footer-links"></div>
+    </div>
+  </footer>
+
+  <script src="content.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>

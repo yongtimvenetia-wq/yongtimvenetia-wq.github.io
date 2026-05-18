@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Associate Knowledge Centre | Venetia Yong Tim</title>
+  <meta name="description" content="Case study: Associate Knowledge Centre — centralized training and support hub onboarding 1,500+ associates." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+  <style>
+    .ks-wrap {
+      background: var(--cream);
+      padding: 64px 0 96px;
+    }
+
+    /* Label */
+    .ks-label {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin: 0 0 20px;
+    }
+
+    /* Hero headline */
+    .ks-headline {
+      font-family: var(--font-serif);
+      font-weight: 400;
+      font-size: clamp(2.2rem, 5vw, 4rem);
+      line-height: 1.05;
+      letter-spacing: -.03em;
+      color: var(--ink);
+      margin: 0 0 20px;
+    }
+    .ks-headline em { font-style: italic; }
+
+    /* Intro paragraph */
+    .ks-intro {
+      font-size: .9rem;
+      line-height: 1.65;
+      color: var(--ink-soft);
+      max-width: 680px;
+      margin: 0 0 36px;
+    }
+
+    /* Section row: number + heading */
+    .ks-section-row {
+      display: grid;
+      grid-template-columns: 48px 1fr;
+      gap: 16px;
+      align-items: start;
+      margin-bottom: 28px;
+    }
+    .ks-section-num {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      letter-spacing: .08em;
+      color: var(--muted);
+      padding-top: 6px;
+    }
+    .ks-section-heading {
+      font-family: var(--font-serif);
+      font-weight: 400;
+      font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+      line-height: 1.1;
+      letter-spacing: -.02em;
+      color: var(--ink);
+      margin: 0 0 8px;
+    }
+    .ks-section-heading em { font-style: italic; }
+    .ks-section-sub {
+      font-size: .9rem;
+      color: var(--ink-soft);
+      line-height: 1.55;
+    }
+
+    /* Stats */
+    .ks-stats {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1px;
+      background: var(--border-solid);
+      border: 1px solid var(--border-solid);
+      border-radius: var(--radius);
+      overflow: hidden;
+      margin-bottom: 40px;
+    }
+    .ks-stat {
+      background: var(--surface);
+      padding: 20px 20px 16px;
+    }
+    .ks-stat-value {
+      font-family: var(--font-serif);
+      font-size: 2.2rem;
+      font-weight: 400;
+      color: var(--ink);
+      letter-spacing: -.02em;
+      line-height: 1;
+      margin: 0 0 5px;
+    }
+    .ks-stat-label {
+      font-family: var(--font-mono);
+      font-size: 9px;
+      letter-spacing: .10em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin: 0;
+    }
+
+    /* Divider */
+    .ks-divider {
+      border: none;
+      border-top: 1px solid var(--border-solid);
+      margin: 0 0 32px;
+    }
+
+    /* Steps + Outputs two-column */
+    .ks-two-col {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 40px;
+    }
+    .ks-col-label {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin: 0 0 16px;
+    }
+    .ks-step-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+    .ks-step {
+      display: grid;
+      grid-template-columns: 28px 1fr;
+      gap: 8px;
+      padding: 12px 0;
+      border-top: 1px solid var(--border);
+      font-size: .875rem;
+      line-height: 1.6;
+      color: var(--ink-soft);
+    }
+    .ks-step:last-child { border-bottom: 1px solid var(--border); }
+    .ks-step-num {
+      font-family: var(--font-mono);
+      font-size: 9px;
+      letter-spacing: .08em;
+      color: var(--muted);
+      padding-top: 3px;
+    }
+
+    /* Back link */
+    .ks-back {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-family: var(--font-mono);
+      font-size: 11px;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 40px;
+      transition: color .15s;
+    }
+    .ks-back:hover { color: var(--ink); opacity: 1; }
+
+    /* Surfaces two-up */
+    .ks-surfaces-wrap {
+      margin-top: 56px;
+    }
+    .ks-surfaces-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+      margin-top: 28px;
+    }
+    .ks-surface-card {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .ks-surface-img {
+      width: 100%;
+      display: block;
+      border-radius: 10px;
+      border: 1px solid var(--border-solid);
+      box-shadow: 0 2px 8px rgba(0,0,0,.06), 0 8px 24px rgba(0,0,0,.10);
+    }
+    .ks-surface-caption {
+      font-size: .8rem;
+      color: var(--ink-soft);
+      line-height: 1.55;
+    }
+    .ks-surface-caption strong {
+      display: block;
+      font-family: var(--font-mono);
+      font-size: 9px;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 4px;
+    }
+    @media (max-width: 700px) {
+      .ks-surfaces-grid { grid-template-columns: 1fr; }
+    }
+
+    /* Screenshot band */
+    .ks-screens-wrap {
+      margin-top: 48px;
+      margin-bottom: 48px;
+      border: 1px solid var(--border-solid);
+      border-radius: var(--radius);
+      background: var(--surface);
+      padding: 40px clamp(20px, 4vw, 56px) 36px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 20px;
+    }
+    .ks-screens-eyebrow {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      letter-spacing: .16em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+    .ks-screens-full {
+      width: 100%;
+      max-width: 960px;
+      display: block;
+      border-radius: 12px;
+      box-shadow:
+        0 2px 8px rgba(0,0,0,.06),
+        0 8px 24px rgba(0,0,0,.10);
+    }
+
+    @media (max-width: 700px) {
+      .ks-two-col { grid-template-columns: 1fr; }
+      .ks-stats { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 400px) {
+      .ks-stats { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body data-page="case-knowledge-centre">
+
+  <header class="site-header">
+    <div class="container">
+      <a href="index.html" class="brand"><span class="js-brand">Venetia Yongtim</span></a>
+      <nav class="nav" aria-label="Main">
+        <a href="index.html"     data-nav="about">About</a>
+        <a href="portfolio.html" data-nav="portfolio">Portfolio</a>
+        <a href="experience.html" data-nav="experience">Experience</a>
+        <a href="mailto:yongtimvenetia@gmail.com">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <div class="ks-wrap">
+      <div class="container">
+
+
+        <h1 class="ks-headline">Associate<br><em>knowledge centre.</em></h1>
+        <p class="ks-intro">A centralized training and support hub to onboard 1,500+ associates. Streamlined access to training resources, empowered admins with self-service tools, and gave staff a structured channel for bug reporting.</p>
+
+        <!-- Stats -->
+        <div class="ks-stats">
+          <div class="ks-stat">
+            <p class="ks-stat-value">1,500+</p>
+            <p class="ks-stat-label">Associates Onboarded</p>
+          </div>
+          <div class="ks-stat">
+            <p class="ks-stat-value">29</p>
+            <p class="ks-stat-label">Training Videos · 70+ Min</p>
+          </div>
+          <div class="ks-stat">
+            <p class="ks-stat-value">67%</p>
+            <p class="ks-stat-label">New Associate Engagement Rate</p>
+          </div>
+          <div class="ks-stat">
+            <p class="ks-stat-value">82%</p>
+            <p class="ks-stat-label">Clinic Satisfaction</p>
+          </div>
+        </div>
+
+        <!-- Screenshot -->
+        <div class="ks-screens-wrap">
+          <p class="ks-screens-eyebrow">Associate Knowledge Centre</p>
+          <img
+            src="images/knowledge-centre.png"
+            alt="Associate Knowledge Centre interface showing training hub with key metrics"
+            class="ks-screens-full"
+          />
+        </div>
+
+        <hr class="ks-divider" />
+
+        <!-- Steps taken + Outputs -->
+        <div class="ks-two-col">
+          <div>
+            <p class="ks-col-label">Steps Taken</p>
+            <ul class="ks-step-list">
+              <li class="ks-step">
+                <span class="ks-step-num">01</span>
+                <span>Partnered with design &amp; creative team to develop digital and printable training materials.</span>
+              </li>
+              <li class="ks-step">
+                <span class="ks-step-num">02</span>
+                <span>Identified areas of complexity to prioritize high-impact training content.</span>
+              </li>
+              <li class="ks-step">
+                <span class="ks-step-num">03</span>
+                <span>Established a structured channel for bug reporting and self-service admin tooling.</span>
+              </li>
+            </ul>
+          </div>
+          <div>
+            <p class="ks-col-label">Outputs</p>
+            <ul class="ks-step-list">
+              <li class="ks-step">
+                <span class="ks-step-num">01</span>
+                <span>Produced 29 training videos (70+ minutes total) to improve accessibility and adoption.</span>
+              </li>
+              <li class="ks-step">
+                <span class="ks-step-num">02</span>
+                <span>Authored 95% of content via Contentful so the clinic ops team can update it without engineering.</span>
+              </li>
+              <li class="ks-step">
+                <span class="ks-step-num">03</span>
+                <span>Surfaced Training videos · Training documents · Common questions as first-class hub cards.</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- What the centre unlocks -->
+        <div class="ks-surfaces-wrap">
+          <hr class="ks-divider" style="margin-top: 48px;" />
+          <div class="ks-section-row">
+            <span class="ks-section-num">02</span>
+            <div>
+              <h2 class="ks-section-heading">What the centre <em>unlocks.</em></h2>
+              <p class="ks-section-sub">Two surfaces designed to reduce dependency on engineering: 1) learning 2) access management.</p>
+            </div>
+          </div>
+          <div class="ks-surfaces-grid">
+            <div class="ks-surface-card">
+              <img
+                src="images/training-materials.png"
+                alt="Training resources page showing videos and documents grouped by topic with a pinned refresher banner"
+                class="ks-surface-img"
+              />
+              <div class="ks-surface-caption">
+                <strong>Training materials</strong>
+                Videos &amp; documents grouped by topic, with a refresher banner pinned at the top.
+              </div>
+            </div>
+            <div class="ks-surface-card">
+              <img
+                src="images/manage-associates.png"
+                alt="Manage Associates admin page listing associates with edit and delete controls"
+                class="ks-surface-img"
+              />
+              <div class="ks-surface-caption">
+                <strong>Self-service tools</strong>
+                Practice admins can manage associate access and reset PIN codes.
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div><!-- /.container -->
+    </div><!-- /.ks-wrap -->
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="js-footer-copy"></div>
+      <div class="footer-links js-footer-links"></div>
+    </div>
+  </footer>
+
+  <script src="content.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>

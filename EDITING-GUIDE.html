@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Editing your portfolio website</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Source+Serif+4:wght@500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #EAF2FA;
+      --surface: #FFFFFF;
+      --border: #D6E4F0;
+      --primary: #4A7FB8;
+      --primary-dark: #2C5F92;
+      --text: #1F3A5F;
+      --text-muted: #5C7795;
+      --code-bg: #F5F9FD;
+      --shadow: 0 4px 16px rgba(31, 58, 95, 0.08);
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: "Inter", system-ui, sans-serif;
+      color: var(--text);
+      background: var(--bg);
+      line-height: 1.65;
+      -webkit-font-smoothing: antialiased;
+    }
+    .wrap {
+      max-width: 760px;
+      margin: 40px auto;
+      padding: 0 24px 64px;
+    }
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 40px 48px;
+      box-shadow: var(--shadow);
+    }
+    h1, h2, h3 {
+      font-family: "Source Serif 4", Georgia, serif;
+      color: var(--text);
+      line-height: 1.25;
+    }
+    h1 { font-size: 2.2rem; margin: 0 0 8px; }
+    h2 { font-size: 1.45rem; margin: 32px 0 12px; padding-top: 8px; border-top: 1px solid var(--border); }
+    h2:first-of-type { border-top: 0; padding-top: 0; }
+    h3 { font-size: 1.15rem; margin: 24px 0 8px; color: var(--primary-dark); }
+    p { margin: 0 0 14px; }
+    .lede { color: var(--text-muted); font-size: 1.05rem; margin-bottom: 24px; }
+    code, pre {
+      font-family: "SF Mono", "Menlo", Consolas, monospace;
+      font-size: 0.92rem;
+    }
+    code {
+      background: var(--code-bg);
+      padding: 2px 6px;
+      border-radius: 4px;
+      color: var(--primary-dark);
+    }
+    pre {
+      background: var(--code-bg);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 14px 18px;
+      overflow-x: auto;
+      margin: 0 0 18px;
+      line-height: 1.55;
+    }
+    pre code { background: transparent; padding: 0; color: var(--text); }
+    ul { padding-left: 1.3em; margin: 0 0 14px; }
+    li { margin-bottom: 6px; }
+    strong { color: var(--text); }
+    a { color: var(--primary-dark); }
+    .toc {
+      background: var(--code-bg);
+      border-left: 3px solid var(--primary);
+      padding: 14px 20px;
+      border-radius: 6px;
+      margin: 0 0 28px;
+    }
+    .toc strong { display: block; margin-bottom: 6px; }
+    .toc ul { margin: 0; padding-left: 1.2em; }
+    .toc li { margin-bottom: 2px; }
+    .tip {
+      background: #EDF5FC;
+      border-left: 3px solid var(--primary);
+      padding: 12px 18px;
+      border-radius: 6px;
+      margin: 14px 0;
+      font-size: 0.97rem;
+    }
+    .file-tree {
+      background: var(--code-bg);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 16px 20px;
+      font-family: "SF Mono", "Menlo", Consolas, monospace;
+      font-size: 0.92rem;
+      white-space: pre;
+      overflow-x: auto;
+      margin-bottom: 18px;
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="card">
+
+    <h1>Editing your portfolio website</h1>
+    <p class="lede">This guide explains how to update the site after it's built — no coding experience required. Every change you'll need to make happens in <strong>one file</strong>: <code>content.js</code>.</p>
+
+    <div class="toc">
+      <strong>In this guide</strong>
+      <ul>
+        <li>What's in this folder</li>
+        <li>Previewing the site on your own computer</li>
+        <li>The 5 things you'll do most often</li>
+        <li>Common mistakes (and how to avoid them)</li>
+        <li>Publishing your changes to the live site</li>
+      </ul>
+    </div>
+
+    <h2>What's in this folder</h2>
+<div class="file-tree">portfolio-website/
+├── index.html              ← "About me" page
+├── portfolio.html          ← "Portfolio" page
+├── experience.html         ← "Experience" page
+├── ai-exploration.html     ← "AI Exploration" page
+├── styles.css              ← Visual styling (don't need to touch)
+├── content.js              ← ★ THIS IS WHERE YOU EDIT TEXT, LINKS, IMAGES
+├── script.js               ← Wiring (don't need to touch)
+├── images/                 ← Drop your image files here
+└── EDITING-GUIDE.html      ← This file</div>
+
+    <h2>Previewing the site on your own computer</h2>
+    <p>Double-click <code>index.html</code>. It opens in your default browser. The nav links at the top take you to the other pages. You can preview any change to <code>content.js</code> instantly — save the file, then reload the browser tab.</p>
+
+    <h2>The 5 things you'll do most often</h2>
+
+    <h3>1. Edit text</h3>
+    <p>Open <code>content.js</code> in any text editor. TextEdit on Mac works, but <strong>Visual Studio Code</strong> (free at <a href="https://code.visualstudio.com" target="_blank">code.visualstudio.com</a>) is much nicer because it color-codes the file and warns you about typos.</p>
+    <p>Find the line you want, change the text between the <code>"double quotes"</code>, and save.</p>
+    <p>Example — to change your subheadline:</p>
+<pre><code>about: {
+  headline: "Venetia Yong Tim",
+  subheadline: "Driving product and operational execution...",   ← change this string
+  ...
+}</code></pre>
+    <p>If you want a paragraph break inside the bio, use <code>\n\n</code>:</p>
+<pre><code>bio: "First paragraph here.\n\nSecond paragraph here."</code></pre>
+
+    <h3>2. Add a project</h3>
+    <p>Inside the <code>portfolio</code> section, find the <code>projects: [ ... ]</code> block. Copy one of the existing <code>{ ... }</code> blocks (including its trailing comma) and paste it below. Then edit its fields.</p>
+<pre><code>projects: [
+  {
+    title: "Project One",
+    summary: "Description",
+    image: "images/one.jpg",
+    link: "https://example.com",
+    linkLabel: "View project",
+    tags: ["Design", "Research"]
+  },
+  // ← paste a new { ... } block here
+]</code></pre>
+
+    <h3>3. Add a link</h3>
+    <p>Anywhere you see a <code>link: ""</code> field, paste a URL between the quotes:</p>
+<pre><code>link: "https://www.linkedin.com/in/yourprofile/"</code></pre>
+    <p>For email links, use the <code>mailto:</code> prefix:</p>
+<pre><code>url: "mailto:yongtimvenetia@gmail.com"</code></pre>
+
+    <h3>4. Add an image</h3>
+    <p>1. Drop the image file (JPG or PNG) into the <code>images/</code> folder.</p>
+    <p>2. In <code>content.js</code>, reference it by filename, prefixed with <code>images/</code>:</p>
+<pre><code>image: "images/my-project.jpg"</code></pre>
+    <div class="tip">Tips: keep images under ~1 MB each so the site loads quickly. You can resize big phone photos with Preview (Mac) — open the image, choose <em>Tools → Adjust Size</em>, set width to ~1600 px, save. Square images work best for the About Me headshot; 16:10 images work best for project tiles.</div>
+
+    <h3>5. Add an experience entry</h3>
+    <p>Inside the <code>experience</code> section, find the <code>roles: [ ... ]</code> block and add another <code>{ ... }</code> block, same pattern as projects. Bullets go inside <code>bullets: [ ... ]</code>, each one in quotes, separated by commas:</p>
+<pre><code>{
+  title: "Designer",
+  company: "Acme Inc.",
+  location: "London, UK",
+  dates: "2023 – Present",
+  bullets: [
+    "Led the rebrand of the product suite.",
+    "Mentored two junior designers."
+  ]
+}</code></pre>
+
+    <h2>Common mistakes (and how to avoid them)</h2>
+    <ul>
+      <li><strong>Missing comma between items.</strong> Every item inside <code>[ ... ]</code> needs a comma after its closing <code>}</code> — except the very last one (optional). If the site shows a blank page after an edit, this is usually why.</li>
+      <li><strong>Missing closing quote.</strong> Every <code>"text"</code> needs both opening and closing quotes. If your text has a quote inside it, escape it with a backslash: <code>"She said \"hello\"."</code></li>
+      <li><strong>Deleted a closing bracket.</strong> If you accidentally delete a <code>}</code> or <code>]</code>, the page won't render. Compare against the original layout and add it back.</li>
+    </ul>
+    <div class="tip">If something breaks, open the page in your browser, right-click → <em>Inspect</em> → <em>Console</em> tab. Any error will be shown with a line number pointing into <code>content.js</code>.</div>
+
+    <h2>Publishing your changes to the live site</h2>
+    <p>Once your site is live on GitHub Pages, updating it means re-uploading your edited files.</p>
+
+    <h3>Easiest path: GitHub web UI</h3>
+    <ol>
+      <li>Go to your repository on github.com (e.g., <code>github.com/your-username/portfolio</code>).</li>
+      <li>Click on <code>content.js</code>.</li>
+      <li>Click the pencil icon (✏️ "Edit this file").</li>
+      <li>Make your changes directly in the browser, scroll down, click <strong>Commit changes</strong>.</li>
+      <li>Your live site updates within a minute.</li>
+    </ol>
+    <p>For uploading new images: click into the <code>images/</code> folder, click <strong>Add file → Upload files</strong>, drag your image in, commit.</p>
+
+    <h3>Nicer path: GitHub Desktop</h3>
+    <p>Once your site is more active, install <strong>GitHub Desktop</strong> (free, at <a href="https://desktop.github.com" target="_blank">desktop.github.com</a>). Visual app where you:</p>
+    <ol>
+      <li>Edit files in your local folder however you like.</li>
+      <li>Open GitHub Desktop — it shows what changed.</li>
+      <li>Type a short message like "Updated bio" and click <strong>Commit to main</strong>, then <strong>Push origin</strong>.</li>
+    </ol>
+    <p>Your live site updates within a minute. This is what most non-developers end up using.</p>
+
+    <h2>Getting help</h2>
+    <ul>
+      <li>Open the file in VS Code — it underlines broken syntax with a red squiggle.</li>
+      <li>Compare your edits against the original <code>content.js</code> (you can always view it on GitHub).</li>
+      <li>Ask me — I can look at your <code>content.js</code> and fix it.</li>
+    </ul>
+
+    </div>
+  </div>
+</body>
+</html>
